@@ -27,6 +27,8 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
       return next();
     });
   }
+
+  return next();
 };
 
 export const signToken = (username: string, email: string, _id: unknown) => {
