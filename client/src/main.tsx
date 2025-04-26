@@ -16,7 +16,7 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: 'https://book-searching-v2.onrender.com/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
