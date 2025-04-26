@@ -20,14 +20,12 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
     jwt.verify(token, secretKey, (err, user) => {
       if (err) {
-        return res.sendStatus(403); // Forbidden
+        return res.sendStatus(401); // unauthorized
       }
 
       req.user = user as JwtPayload;
       return next();
     });
-  } else {
-    res.sendStatus(401); // Unauthorized
   }
 };
 
