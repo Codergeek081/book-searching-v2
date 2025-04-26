@@ -9,7 +9,6 @@ import routes from './routes/index.js';
 import cors from 'cors';
 import { authenticateToken } from './services/auth.js';
 import path from 'path';
-import type { Request, Response } from 'express';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -37,10 +36,12 @@ app.use(
 );
 
 if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(process.cwd(), 'client', 'dist');
+  app.use(express.static(clientDist));
   app.use(express.static(path.join(__dirname, '../client/dist')));
-  app.get('*', (_: Request, res: Response) =>
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'))
-  );
+  app.get('/*', (_req, res) => {
+    res.sendFile(path.join(clientDist, 'index.html'));
+  });
 }
 
 app.use(routes);
