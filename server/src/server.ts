@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   '/graphql',
+  express.json(),
   authenticateToken,
   expressMiddleware(server, {
     context: async ({ req }) => ({
